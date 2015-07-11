@@ -1,0 +1,311 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+DBFReader
+</name>
+</assembly>
+<members>
+<member name="M:DBFReader.WinUsbDemo.DeviceManagement.DeviceNameMatch(System.Windows.Forms.Message,System.String)">
+	<summary>
+ Compares two device path names. Used to find out if the device name 
+ of a recently attached or removed device matches the name of a 
+ device the application is communicating with.
+ </summary>
+	<param name="m"> a WM_DEVICECHANGE message. A call to RegisterDeviceNotification
+ causes WM_DEVICECHANGE messages to be passed to an OnDeviceChange routine.. </param>
+	<param name="mydevicePathName"> a device pathname returned by 
+ SetupDiGetDeviceInterfaceDetail in an SP_DEVICE_INTERFACE_DETAIL_DATA structure. </param>
+	<returns>
+ True if the names match, False if not.
+ </returns>
+</member><member name="M:DBFReader.WinUsbDemo.DeviceManagement.FindDeviceFromGuid(System.Guid,System.String@)">
+	<summary>
+ Use SetupDi API functions to retrieve the device path name of an
+ attached device that belongs to a device interface class.
+ </summary>
+	<param name="myGuid"> an interface class GUID. </param>
+	<param name="devicePathName"> a pointer to the device path name 
+ of an attached device. </param>
+	<returns>
+  True if a device is found, False if not. 
+ </returns>
+</member><member name="M:DBFReader.WinUsbDemo.DeviceManagement.RegisterForDeviceNotifications(System.String,System.IntPtr,System.Guid,System.IntPtr@)">
+	<summary>
+ Requests to receive a notification when a device is attached or removed.
+ </summary>
+	<param name="devicePathName"> handle to a device. </param>
+	<param name="formHandle"> handle to the window that will receive device events. </param>
+	<param name="classGuid"> device interface GUID. </param>
+	<param name="deviceNotificationHandle"> returned device notification handle. </param>
+	<returns>
+ True on success.
+ </returns>
+</member><member name="M:DBFReader.WinUsbDemo.DeviceManagement.StopReceivingDeviceNotifications(System.IntPtr)">
+	<summary>
+ Requests to stop receiving notification messages when a device in an
+ interface class is attached or removed.
+ </summary>
+	<param name="deviceNotificationHandle"> handle returned previously by
+ RegisterDeviceNotification. </param>
+</member><member name="T:DBFReader.WinUsbDemo.DeviceManagement">
+	<summary>
+ Routines for detecting devices and receiving device notifications.
+ </summary>
+</member><member name="T:DBFReader.WinUsbDemo.FileIO">
+	<summary>
+ API declarations relating to file I/O.
+ </summary>
+</member><member name="T:DBFReader.USBHandlerClass.ReadFromDeviceDelegate">
+	<summary>
+ Define a class of delegates with the same parameters as 
+ WinUsbDevice.ReadViaBulkTransfer and WinUsbDevice.ReadViaInterruptTransfer.
+ Used for asynchronous reads from the device.
+ </summary>
+</member><member name="M:DBFReader.USBHandlerClass.FindMyDevice">
+	<summary>
+ If a device with the specified device interface GUID hasn't been previously detected,
+ look for it. If found, open a handle to the device.
+ </summary>
+	<returns>
+ True if the device is detected, False if not detected.
+ </returns>
+</member><member name="M:DBFReader.USBHandlerClass.OnDeviceChange(System.Windows.Forms.Message)">
+	<summary>
+ Called when a WM_DEVICECHANGE message has arrived,
+ indicating that a device has been attached or removed.
+ </summary>
+	<param name="m"> A message with information about the device. </param>
+</member><member name="M:DBFReader.USBHandlerClass.ReadDataViaInterruptTransfer">
+	<summary>
+ Initiates a read operation from an interrupt IN endpoint.
+ To enable reading without blocking the main thread, uses an asynchronous delegate.
+ </summary>
+	<remarks>
+ To enable reading more than 2 bytes (with device firmware support), increase bytesToRead.
+ </remarks>
+</member><member name="M:DBFReader.USBHandlerClass.GetReceivedInterruptData(System.IAsyncResult)">
+	<summary>
+ Retrieves received data from an interrupt endpoint.
+ This routine is called automatically when myWinUsbDevice.ReadViaInterruptTransfer
+ returns. The routine calls several marshaling routines to access the main form.
+ </summary>
+	<param name="ar"> An object containing status information about the 
+ asynchronous operation.</param>
+</member><member name="F:DBFReader.WinUsbDemo.DeviceManagement.DBT_DEVICEARRIVAL">
+	<remarks>
+ API declarations relating to device management (SetupDixxx and 
+ RegisterDeviceNotification functions).
+ Constants are from dbt.h and setupapi.h.
+</remarks>
+</member><member name="F:DBFReader.WinUsbDemo.WinUsbDevice.DEVICE_SPEED">
+	<remarks>
+ These declarations are translated from the C declarations in various files
+ in the Windows DDK. The files are:
+ 
+ winddk\6001\inc\api\usb.h
+ winddk\6001\inc\api\usb100.h
+ winddk\6001\inc\api\winusbio.h
+ 
+ (your home directory and release number may vary)
+</remarks>
+</member><member name="T:DBFReader.nodeDBDataSet.nodedBDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:DBFReader.nodeDBDataSet.nodedBRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:DBFReader.nodeDBDataSet.nodedBRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:DBFReader.nodeDBDataSet">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="T:DBFReader.nodeDBDataSetTableAdapters.nodedBTableAdapter">
+	<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member><member name="M:DBFReader.nodeDBDataSetTableAdapters.TableAdapterManager.UpdateUpdatedRows(DBFReader.nodeDBDataSet,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Update rows in top-down order.
+</summary>
+</member><member name="M:DBFReader.nodeDBDataSetTableAdapters.TableAdapterManager.UpdateInsertedRows(DBFReader.nodeDBDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Insert rows in top-down order.
+</summary>
+</member><member name="M:DBFReader.nodeDBDataSetTableAdapters.TableAdapterManager.UpdateDeletedRows(DBFReader.nodeDBDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Delete rows in bottom-up order.
+</summary>
+</member><member name="M:DBFReader.nodeDBDataSetTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member><member name="M:DBFReader.nodeDBDataSetTableAdapters.TableAdapterManager.UpdateAll(DBFReader.nodeDBDataSet)">
+	<summary>
+Update all changes to the dataset.
+</summary>
+</member><member name="T:DBFReader.nodeDBDataSetTableAdapters.TableAdapterManager.UpdateOrderOption">
+	<summary>
+Update Order Option
+</summary>
+</member><member name="T:DBFReader.nodeDBDataSetTableAdapters.TableAdapterManager.SelfReferenceComparer">
+	<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member><member name="T:DBFReader.nodeDBDataSetTableAdapters.TableAdapterManager">
+	<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member><member name="M:DBFReader.WinUsbDemo.WinUsbDevice.CloseDeviceHandle">
+	<summary>
+ Closes the device handle obtained with CreateFile and frees resources.
+ </summary>
+</member><member name="M:DBFReader.WinUsbDemo.WinUsbDevice.Do_Control_Read_Transfer(System.Byte[]@)">
+	<summary>
+ Initiates a Control Read transfer. Data stage is device to host.
+ </summary>
+	<param name="dataStage"> The received data. </param>
+	<returns>
+ True on success, False on failure.
+ </returns>
+</member><member name="M:DBFReader.WinUsbDemo.WinUsbDevice.Do_Control_Write_Transfer(System.Byte[])">
+	<summary>
+ Initiates a Control Write transfer. Data stage is host to device.
+ </summary>
+	<param name="dataStage"> The data to send. </param>
+	<returns>
+ True on success, False on failure.
+ </returns>
+</member><member name="M:DBFReader.WinUsbDemo.WinUsbDevice.GetDeviceHandle(System.String)">
+	<summary>
+ Requests a handle with CreateFile.
+ </summary>
+	<param name="devicePathName"> Returned by SetupDiGetDeviceInterfaceDetail 
+ in an SP_DEVICE_INTERFACE_DETAIL_DATA structure. </param>
+	<returns>
+ The handle.
+ </returns>
+</member><member name="M:DBFReader.WinUsbDemo.WinUsbDevice.InitializeDevice">
+	<summary>
+ Initializes a device interface and obtains information about it.
+ Calls these winusb API functions:
+   WinUsb_Initialize
+   WinUsb_QueryInterfaceSettings
+   WinUsb_QueryPipe
+ </summary>
+	<returns>
+ True on success, False on failure.
+ </returns>
+</member><member name="M:DBFReader.WinUsbDemo.WinUsbDevice.IsWindowsXpOrLater">
+	<summary>
+ Is the current operating system Windows XP or later?
+ The WinUSB driver requires Windows XP or later.
+ </summary>
+	<returns>
+ True if Windows XP or later, False if not.
+ </returns>
+</member><member name="M:DBFReader.WinUsbDemo.WinUsbDevice.QueryDeviceSpeed">
+	<summary>
+ Gets a value that corresponds to a USB_DEVICE_SPEED. 
+ Unfortunatly, WinUsb_QueryDeviceInformation isn't reliable 
+ and might return 1 (low speed) for a full-speed device.
+ </summary>
+</member><member name="M:DBFReader.WinUsbDemo.WinUsbDevice.ReadViaBulkTransfer(System.Byte,System.UInt32,System.Byte[]@,System.UInt32@,System.Boolean@)">
+	<summary>
+ Attempts to read data from a bulk IN endpoint.
+ </summary>
+	<param name="PipeID"> Endpoint address. </param>
+	<param name="bytesToRead"> Number of bytes to read. </param>
+	<param name="Buffer"> Buffer for storing the bytes read. </param>
+	<param name="bytesRead"> Number of bytes read. </param>
+	<param name="success"> Success or failure status. </param>
+</member><member name="M:DBFReader.WinUsbDemo.WinUsbDevice.ReadViaInterruptTransfer(System.Byte,System.UInt32,System.Byte[]@,System.UInt32@,System.Boolean@)">
+	<summary>
+ Attempts to read data from an interrupt IN endpoint. 
+ </summary>
+	<param name="PipeID"> Endpoint address. </param>
+	<param name="bytesToRead"> Number of bytes to read. </param>
+	<param name="Buffer"> Buffer for storing the bytes read. </param>
+	<param name="bytesRead"> Number of bytes read. </param>
+	<param name="success"> Success or failure status. </param>
+</member><member name="M:DBFReader.WinUsbDemo.WinUsbDevice.SendViaBulkTransfer(System.Byte[],System.UInt32)">
+	<summary>
+ Attempts to send data via a bulk OUT endpoint.
+ </summary>
+	<param name="buffer"> Buffer containing the bytes to write. </param>
+	<param name="bytesToWrite"> Number of bytes to write. </param>
+	<returns>
+ True on success, False on failure.
+ </returns>
+</member><member name="M:DBFReader.WinUsbDemo.WinUsbDevice.SendViaInterruptTransfer(System.Byte[],System.UInt32)">
+	<summary>
+ Attempts to send data via an interrupt OUT endpoint.
+ </summary>
+	<param name="buffer"> Buffer containing the bytes to write. </param>
+	<param name="bytesToWrite"> Number of bytes to write. </param>
+	<returns>
+ True on success, False on failure.
+ </returns>
+</member><member name="M:DBFReader.WinUsbDemo.WinUsbDevice.SetPipePolicy(System.Byte,System.UInt32,System.Byte)">
+	<summary>
+ Sets pipe policy.
+ Used when the value parameter is a byte (all except PIPE_TRANSFER_TIMEOUT).
+ </summary>
+	<param name="pipeId"> Pipe to set a policy for. </param>
+	<param name="policyType"> POLICY_TYPE member. </param>
+	<param name="value"> Policy value. </param>
+	<returns>
+ True on success, False on failure.
+ </returns>
+</member><member name="M:DBFReader.WinUsbDemo.WinUsbDevice.SetPipePolicy(System.Byte,System.UInt32,System.UInt32)">
+	<summary>
+ Sets pipe policy.
+ Used when the value parameter is a UInt32 (PIPE_TRANSFER_TIMEOUT only).
+ </summary>
+	<param name="pipeId"> Pipe to set a policy for. </param>
+	<param name="policyType"> POLICY_TYPE member. </param>
+	<param name="value"> Policy value. </param>
+	<returns>
+ True on success, False on failure.
+ </returns>
+</member><member name="M:DBFReader.WinUsbDemo.WinUsbDevice.UsbEndpointDirectionIn(System.Int32)">
+	<summary>
+ Is the endpoint's direction IN (device to host)?
+ </summary>
+	<param name="addr"> The endpoint address. </param>
+	<returns>
+ True if IN (device to host), False if OUT (host to device)
+ </returns>
+</member><member name="M:DBFReader.WinUsbDemo.WinUsbDevice.UsbEndpointDirectionOut(System.Int32)">
+	<summary>
+ Is the endpoint's direction OUT (host to device)?
+ </summary>
+	<param name="addr"> The endpoint address. </param>
+	<returns>
+ True if OUT (host to device, False if IN (device to host)
+ </returns>
+</member><member name="T:DBFReader.WinUsbDemo.WinUsbDevice">
+	<summary>
+ Routines for the WinUsb driver supported by Windows Vista and Windows XP.
+ </summary>
+</member><member name="P:DBFReader.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:DBFReader.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:DBFReader.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>
